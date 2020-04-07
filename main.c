@@ -7,28 +7,26 @@
 int main(void)
 {
 	size_t bytes = 0;
-	int lectura;
 	char *entrada;
-	char *token;
-	/*char **argumento;*/
+	char **argumento;
+	int i = 0, lectura;
 
 	while (1)
 	{
 		printf("$ ");
 		lectura = getline(&entrada, &bytes, stdin);
-		split_string(entrada, lectura);
 		if (strcmp(entrada, "\n") == 0)
 			continue;
-		if (lectura == -1)
-			break;
-		entrada = strcat("/bin/", "");
-		token = strtok(entrada, " ");
-
-		while (token)
+		argumento = split_string(&entrada, lectura);
+		while (argumento[i])
 		{
-			printf("%s", token);
-			token = strtok(NULL, " ");
+			printf("%s", argumento[i]);
+			printf("%d\n", i);
+			i++;
 		}
+		for(i = 0; i < 2; i++)
+			free(argumento[i]);
+		free(argumento);
 	}
 	return (0);
 }
