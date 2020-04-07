@@ -17,16 +17,15 @@ int main(void)
 		lectura = getline(&entrada, &bytes, stdin);
 		if (strcmp(entrada, "\n") == 0)
 			continue;
-		argumento = split_string(&entrada, lectura);
+		argumento = split_string(entrada, lectura);
 		while (argumento[i])
 		{
 			printf("%s", argumento[i]);
-			printf("%d\n", i);
 			i++;
 		}
-		for(i = 0; i < 2; i++)
-			free(argumento[i]);
-		free(argumento);
+		i = 0;
+		free_argument(argumento);
+		free(entrada);
 	}
 	return (0);
 }
