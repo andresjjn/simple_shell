@@ -28,7 +28,7 @@ char **split_string(char *entrada, int number)
 			{
 				argumento[k] = malloc((sizeof(char) * ++len) + 5);
 				for (j = 0; j < 5; j++)
-					argumento[k][j++] = dir[j];
+					argumento[k][j] = dir[j];
 				while (entrada[i] != ' ' && entrada[i] != '\n')
 					argumento[k][j++] = entrada[i++];
 				argumento[j] = 0;
