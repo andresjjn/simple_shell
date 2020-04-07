@@ -6,18 +6,17 @@
  * Return: The new double pointer.
  */
 
-char **split_string(char *entrada, int len)
+char **split_string(char *entrada, int number)
 {
-	size_t bytes = 0;
-	int i, j = 1, k = 0, len = 0;
+	int i, j = 1, k = 0, len;
 	char **argumento;
 	char dir[5] = "/bin/";
 
 	for (i = 0; entrada[i] != '\0'; i++)
 		if (entrada[i] == ' ' && entrada[i + 1] != ' ')
 			j++;
-	argumento = malloc(sizeof(char *) * j);
-	for (i = 0; i < lectura;)
+	argumento = malloc((sizeof(char *) * j) + 1);
+	for (i = 0; i < number;)
 	{
 		if (i == 0 || entrada[i++] == ' ')
 		{
@@ -41,8 +40,9 @@ char **split_string(char *entrada, int len)
 				j = 0;
 				while (entrada[i] != ' ' && entrada[i] != '\n')
 					argumento[k][j++] = entrada[i++];
-				argumento[j] = 0;
+				argumento[k][j] = 0;
 				k++;
+				argumento[k] = 0;
 			}
 		}
 	}
