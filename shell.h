@@ -9,5 +9,6 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+char **split_string(char *entrada, int len);
 
 #endif /* SHELL_H */
