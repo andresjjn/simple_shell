@@ -2,14 +2,14 @@
 
 /**
  * main - Shell code with C.
- * Return: -
+ * Return: - 0;
  */
 int main(void)
 {
 	size_t bytes = 0;
 	char *entrada;
 	char **argumento;
-	int i = 0, lectura;
+	int lectura;
 
 	while (1)
 	{
@@ -18,12 +18,7 @@ int main(void)
 		if (strcmp(entrada, "\n") == 0)
 			continue;
 		argumento = split_string(entrada, lectura);
-		while (argumento[i])
-		{
-			printf("%s", argumento[i]);
-			i++;
-		}
-		i = 0;
+		exec(argumento);
 		free_argument(argumento);
 		free(entrada);
 	}

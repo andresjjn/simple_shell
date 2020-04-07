@@ -11,5 +11,6 @@
 #include <fcntl.h>
 char **split_string(char *entrada, int len);
 void free_argument(char **argumento);
+int exec(char **argumento);
 
 #endif /* SHELL_H */

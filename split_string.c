@@ -2,7 +2,7 @@
 /**
  * split_string - divide a string into several within a double pointer.
  * @entrada: string.
- * @len: len of the string.
+ * @number: len of the string.
  * Return: The new double pointer.
  */
 
@@ -62,5 +62,4 @@ void free_argument(char **argumento)
 		free(argumento[i++]);
 	free(argumento[i]);
 	free(argumento);
-	
 }
