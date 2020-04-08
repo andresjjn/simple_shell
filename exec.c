@@ -18,9 +18,10 @@ int exec(char **argumento)
 	{
 		if (execve(argumento[0], argumento, NULL) == -1)
 		{
-			printf("Error: Imposible to execute that command");
+			printf("Error: Imposible to execute that command\n");
 			return (-1);
 		}
 	}
+	free_argument(argumento);
 	return (0);
 }
