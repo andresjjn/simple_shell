@@ -8,6 +8,7 @@
 int exec(char **argumento)
 {
 	pid_t chinga = 0;
+	struct stat stats;
 
 	if (argumento == NULL)
 		return (-1);
@@ -18,11 +19,15 @@ int exec(char **argumento)
 	{
 		if (_strcmp(argumento[0], "/bin/cd") != 0)
 		{
-			if (execve(argumento[0], argumento, NULL) == -1)
+			if (!stat(argumento[0], &stats))
 			{
-				_puts("Error: Imposible to execute that command\n");
-				return (-1);
+				if (execve(argumento[0], argumento, NULL) == -1)
+				{
+					_puts("Error: Imposible to execute that command\n");
+					return (-1);
+				}
 			}
+			
 		}
 		else
 		{

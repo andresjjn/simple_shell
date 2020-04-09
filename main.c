@@ -14,17 +14,14 @@ int main(void)
 	while (1)
 	{
 		lectura = 0;
+		if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
+		{
 			_puts(getcwd(path, sizeof(path)));
 			_puts("$ ");
-		lectura = getline(&entrada, &bytes, stdin);
-		if (lectura < 1)
-		{
-			if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
-			{
-				_putchar('\n');
-				break;
-			}
 		}
+		lectura = getline(&entrada, &bytes, stdin);
+		if (lectura == -1)
+			break;
 		entrada = clean_string(entrada, lectura);
 		if (!entrada)
 			continue;
