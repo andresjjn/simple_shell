@@ -8,7 +8,7 @@
 
 char **split_string(char *entrada, int number)
 {
-	int i = 0, j = 1, k = 0, len = 0;
+	int i = 0, j = 1, k = 0, s = 0, len = 0;
 	char **argumento = NULL;
 	char dir[5] = "/bin/";
 
@@ -24,7 +24,9 @@ char **split_string(char *entrada, int number)
 			len = 0;
 			while (entrada[j] != ' ' && entrada[j] != 0)
 				len++, j++;
-			if (k == 0)
+			while (entrada[s] == dir[s])
+				s++;
+			if (k == 0 && s != 5)
 			{
 				argumento[k] = malloc((sizeof(char) * ++len) + 6);
 				for (j = 0; j < 5; j++)

@@ -7,14 +7,24 @@ int main(void)
 {
 	size_t bytes = 0;
 	char *entrada = NULL;
+	char path[PATH_MAX];
 	char **argumento = NULL;
 	int lectura = 0;
 
 	while (1)
 	{
 		lectura = 0;
-		_puts("$ ");
+			_puts(getcwd(path, sizeof(path)));
+			_puts(" $ ");
 		lectura = getline(&entrada, &bytes, stdin);
+		if (lectura < 1)
+		{
+			if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
+			{
+				_putchar('\n');
+				break;
+			}
+		}
 		entrada = clean_string(entrada, lectura);
 		if (!entrada)
 			continue;
