@@ -13,24 +13,23 @@ char **split_string(char *entrada, int number)
 	char dir[5] = "/bin/";
 
 	for (i = 0; entrada[i] != '\0'; i++)
-		if (entrada[i] == ' ' && entrada[i + 1] != ' ' && entrada[i + 1] != '\n')
+		if (entrada[i] == ' ')
 			j++;
-	entrada[i - 1] = 0;
-	argumento = malloc((sizeof(char *) * j) + 9);
+	argumento = malloc((sizeof(char *) * j) + 8);
 	for (i = 0; i < number;)
 	{
 		if (i == 0 || entrada[i++] == ' ')
 		{
 			j = i;
 			len = 0;
-			while (entrada[j] != ' ' && entrada[j++] != '\n' && entrada[j] != 0)
-				len++;
+			while (entrada[j] != ' ' && entrada[j] != 0)
+				len++, j++;
 			if (k == 0)
 			{
 				argumento[k] = malloc((sizeof(char) * ++len) + 6);
 				for (j = 0; j < 5; j++)
 					argumento[k][j] = dir[j];
-				while (entrada[i] != ' ' && entrada[i] != '\n' && entrada[i] != 0)
+				while (entrada[i] != ' ' && entrada[i] != 0)
 					argumento[k][j++] = entrada[i++];
 				argumento[k][j] = 0;
 				k++;
@@ -39,7 +38,7 @@ char **split_string(char *entrada, int number)
 			{
 				argumento[k] = malloc((sizeof(char) * len) + 2);
 				j = 0;
-				while (entrada[i] != ' ' && entrada[i] != '\n' && entrada[j] != 0)
+				while (entrada[i] != ' ' && entrada[j] != 0)
 					argumento[k][j++] = entrada[i++];
 				argumento[k][j] = 0;
 				k++;

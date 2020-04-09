@@ -13,16 +13,12 @@ int main(void)
 	while (1)
 	{
 		lectura = 0;
-		printf("$ ");
+		_puts("$ ");
 		lectura = getline(&entrada, &bytes, stdin);
-		if (strcmp(entrada, "\n") == 0)
-		{
-			free(entrada);
-			entrada = NULL;
+		entrada = clean_string(entrada, lectura);
+		if (!entrada)
 			continue;
-		}
-
-		if (strcmp(entrada, "exit\n") == 0)
+		if (_strcmp(entrada, "exit") == 0)
 		{
 			free(entrada);
 			entrada = NULL;
