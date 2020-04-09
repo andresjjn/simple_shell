@@ -15,7 +15,7 @@ int main(void)
 	{
 		lectura = 0;
 			_puts(getcwd(path, sizeof(path)));
-			_puts(" $ ");
+			_puts("$ ");
 		lectura = getline(&entrada, &bytes, stdin);
 		if (lectura < 1)
 		{
