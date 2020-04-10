@@ -12,6 +12,8 @@
 #include <fcntl.h>
 #include <limits.h>
 
+extern char **environ;
+
 char **split_string(char *entrada, int len);
 void free_argument(char **argumento);
 int exec(char **argumento);
@@ -19,5 +21,8 @@ char *clean_string(char *entrada, int len);
 int _putchar(char c);
 void _puts(char *str);
 int _strcmp(char *s1, char *s2);
+int _strlen(char *s);
+char *string_con(char *s1, char *s2);
+char *_getenv(char *arg);
 
 #endif /* SHELL_H */
