@@ -68,3 +68,39 @@ char *_getenv(char *arg)
 	}
 	return (&environ[j][i + 1]);
 }
+/**
+ * cpy_env - function that cpy the content of the enviroment variable.
+ * Return: New enviroment variable.
+ */
+char **cpy_env(void)
+{
+	int i = 0, j = 0;
+	char **new;
+
+	while (environ[i])
+		i++;
+	if (environ)
+		new = malloc(sizeof(char *) * i);
+	if(!new)
+		return(new);
+	i = 0;
+	while (environ[i])
+	{
+		new[i] = malloc(sizeof(char) * _strlen(environ[i]));
+		if (!new[i])
+		{
+			free_argument(new);
+			return(NULL);
+		}
+		j = 0;
+		while (environ[i][j])
+		{
+			new[i][j] = environ[i][j];
+			j++;
+		}
+		new[i][j] = 0;
+		i++;
+	}
+	new[i] = NULL;
+	return(new);
+}

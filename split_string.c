@@ -2,50 +2,35 @@
 /**
  * split_string - divide a string into several within a double pointer.
  * @entrada: string.
- * @number: len of the string.
+ * @d: delimiter.
  * Return: The new double pointer.
  */
 
-char **split_string(char *entrada, int number)
+char **split_string(char *entrada, char d)
 {
-	int i = 0, j = 1, k = 0, s = 0, len = 0;
+	int i = 0, j = 1, k = 0, len = 0, number = 0;
 	char **argumento = NULL;
-	char dir[5] = "/bin/";
 
+	number = _strlen(entrada);
 	for (i = 0; entrada[i] != '\0'; i++)
-		if (entrada[i] == ' ')
+		if (entrada[i] == d)
 			j++;
 	argumento = malloc((sizeof(char *) * j) + 8);
 	for (i = 0; i < number;)
 	{
-		if (i == 0 || entrada[i++] == ' ')
+		if (i == 0 || entrada[i++] == d)
 		{
 			j = i;
 			len = 0;
-			while (entrada[j] != ' ' && entrada[j] != 0)
+			while (entrada[j] != d && entrada[j] != 0)
 				len++, j++;
-			while (entrada[s] == dir[s])
-				s++;
-			if (k == 0 && s != 5)
-			{
-				argumento[k] = malloc((sizeof(char) * ++len) + 6);
-				for (j = 0; j < 5; j++)
-					argumento[k][j] = dir[j];
-				while (entrada[i] != ' ' && entrada[i] != 0)
-					argumento[k][j++] = entrada[i++];
-				argumento[k][j] = 0;
-				k++;
-			}
-			else
-			{
-				argumento[k] = malloc((sizeof(char) * len) + 2);
-				j = 0;
-				while (entrada[i] != ' ' && entrada[j] != 0)
-					argumento[k][j++] = entrada[i++];
-				argumento[k][j] = 0;
-				k++;
-				argumento[k] = NULL;
-			}
+			argumento[k] = malloc((sizeof(char) * len) + 2);
+			j = 0;
+			while (entrada[i] != d && entrada[j] != 0)
+				argumento[k][j++] = entrada[i++];
+			argumento[k][j] = 0;
+			k++;
+			argumento[k] = NULL;			
 		}
 	}
 	return (argumento);

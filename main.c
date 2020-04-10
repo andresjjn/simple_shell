@@ -3,14 +3,20 @@
  * main - Shell code with C.
  * Return: - 0;
  */
-int main(void)
+int main(int argc, char *argv[])
 {
 	size_t bytes = 0;
 	char *entrada = NULL;
 	char path[PATH_MAX];
-	char **argumento = NULL;
+	char **argumento = NULL, **env = NULL;
 	int lectura = 0;
 
+	if (argc != 1)
+	{
+		exit(127);
+	}
+	(void)argv;
+	env = cpy_env();
 	while (1)
 	{
 		lectura = 0;
@@ -31,7 +37,9 @@ int main(void)
 			entrada = NULL;
 			return(EXIT_SUCCESS);
 		}
-		argumento = split_string(entrada, lectura);
+		argumento = split_string(entrada, ' ');
+		if (built_ins(argumento, env))
+			continue;
 		exec(argumento);
 	}
 	free(entrada);
