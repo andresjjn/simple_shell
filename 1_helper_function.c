@@ -66,5 +66,5 @@ char *_getenv(char *arg)
 			break;
 		j++;
 	}
-	return (environ[j]);
+	return (&environ[j][i + 1]);
 }
