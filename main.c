@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 		argumento = split_string(entrada, ' ');
 		if (built_ins(argumento, env))
 			continue;
-		exec(argumento);
+		exec(argumento, env);
 		free(entrada);
 		entrada = NULL;
 	}

@@ -55,18 +55,18 @@ char *string_con(char *s1, char *s2)
  * @arg: Parameter to search in env.
  * Return: Pinter with value required.
  */
-char *_getenv(char *arg)
+char *_getenv(char *arg, char **env)
 {
 	int i = 0, j = 0;
 
 	i = _strlen(arg);
 	while (environ[j])
 	{
-		if (_strcmpn(environ[j], arg, i) == 0)
+		if (_strcmpn(env[j], arg, i) == 0 && env[j][i] == '=')
 			break;
 		j++;
 	}
-	return (&environ[j][i + 1]);
+	return (&env[j][i + 1]);
 }
 /**
  * cpy_env - function that cpy the content of the enviroment variable.

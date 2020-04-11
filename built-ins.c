@@ -13,7 +13,7 @@ int built_ins(char **argumento, char **env)
 
 	if (!_strcmp(argumento[0], "cd"))
 	{
-		cd_built_in(argumento);
+		cd_built_in(argumento, env);
 		return (1);
 	}
 	if (!_strcmp(argumento[0], "env"))
@@ -54,27 +54,27 @@ int built_ins(char **argumento, char **env)
  * @argumento: Double pointer with input args.
  * Return: Integer of success or failure.
  */
-int cd_built_in(char **argumento)
+int cd_built_in(char **argumento, char **env)
 {
 	char *dir;
 
 	if (!argumento[1])
 	{
-		dir = _getenv("HOME=");
+		dir = _getenv("HOME", env);
 		chdir(dir);
 		free_argument(argumento);
 		return (1);
 	}
 	if (!_strcmp(argumento[1], "-"))
 	{
-		dir = _getenv("OLDPWD=");
+		dir = _getenv("OLDPWD", env);
 		chdir(dir);
 		_puts(string_con(dir, "\n"));
 		return (1);
 	}
 	if (!_strcmp(argumento[1], "~"))
 	{
-		dir = _getenv("HOME=");
+		dir = _getenv("HOME", env);
 		chdir(dir);
 		return (1);
 	}
