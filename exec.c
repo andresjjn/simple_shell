@@ -3,6 +3,7 @@
 /**
  * exec - Excecute a command with flags.
  * @argumento: Double pointer with command info.
+ * @env: Enviroment variable.
  * Return: 0 works or -1 error.
  */
 int exec(char **argumento, char **env)
@@ -28,7 +29,7 @@ int exec(char **argumento, char **env)
 			{
 				s1 = string_con(path[i], "/");
 				s = string_con(s1, argumento[0]);
-				free (s1);
+				free(s1);
 				s1 = NULL;
 			}
 			if (!stat(s, &stats))
@@ -52,8 +53,9 @@ int exec(char **argumento, char **env)
 }
 
 /**
- * 
- * 
+ * find_path - Split by arrays the paths into env
+ * @env: Enviroment variable.
+ * Return: Double pointer with paths.
  */
 char **find_path(char **env)
 {
@@ -61,5 +63,5 @@ char **find_path(char **env)
 
 	s = _getenv("PATH", env);
 	path = split_string(s, ':');
-	return(path);
+	return (path);
 }

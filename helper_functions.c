@@ -71,10 +71,17 @@ int _putchar(char c)
 char *clean_string(char *entrada, int len)
 {
 	char *new = NULL;
-	int i = 0, j = 0;
+	int i = 0, j = 0, k = 0, t = 0;
 
 	while (entrada[i] == ' ')
-		i++;
+		i++, k++;
+	t = i;
+	while (entrada[t])    
+	{
+		if (entrada[t] == ' ' && entrada[t + 1] == ' ')
+        	k++;
+		t++;
+	}
 	while (entrada[i])
 	{
 		if (entrada[i] == ' ')
@@ -88,7 +95,7 @@ char *clean_string(char *entrada, int len)
 			}
 		}
 		if (entrada[i] != '\n' && !new)
-			new = malloc((len) * sizeof(char));
+			new = malloc((len - k) * sizeof(char));
 		if (entrada[i] != '\n')
 			new[j++] = entrada[i++];
 		else
