@@ -28,5 +28,6 @@ char *_getenv(char *arg);
 int built_ins(char **argumento, char **env);
 int cd_built_in(char **argumento);
 char **cpy_env(void);
+char **_steven(char *name, char *ptr, char **env);
 
 #endif /* SHELL_H */

@@ -30,7 +30,7 @@ char **split_string(char *entrada, char d)
 				argumento[k][j++] = entrada[i++];
 			argumento[k][j] = 0;
 			k++;
-			argumento[k] = NULL;			
+			argumento[k] = NULL;
 		}
 	}
 	return (argumento);
@@ -50,7 +50,7 @@ void free_argument(char **argumento)
 	{
 		free(argumento[i]);
 		argumento[i++] = NULL;
-	}	
+	}
 	free(argumento);
 	argumento = NULL;
 }

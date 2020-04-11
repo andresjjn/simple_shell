@@ -81,8 +81,8 @@ char **cpy_env(void)
 		i++;
 	if (environ)
 		new = malloc(sizeof(char *) * i);
-	if(!new)
-		return(new);
+	if (!new)
+		return (new);
 	i = 0;
 	while (environ[i])
 	{
@@ -90,7 +90,7 @@ char **cpy_env(void)
 		if (!new[i])
 		{
 			free_argument(new);
-			return(NULL);
+			return (NULL);
 		}
 		j = 0;
 		while (environ[i][j])
@@ -102,5 +102,43 @@ char **cpy_env(void)
 		i++;
 	}
 	new[i] = NULL;
-	return(new);
+	return (new);
+}
+
+/**
+ * _steven - set or create a enviroment variable.
+ * @name: Name of new/set variable.
+ * @ptr: Pointer of new value for env.
+ * @env: Enviroment variable.
+ * Return: New/set of enviroment variable.
+ */
+char **_steven(char *name, char *ptr, char **env)
+{
+	int i = 0, j = 0;
+	char **tmp = NULL;
+	char *con = NULL, *t = NULL;
+
+	if (!ptr || !name)
+		return (NULL);
+	con = string_con(name, "=");
+	while (env[i])
+	{
+		if (_strcmpn(con, env[i], _strlen(name)) == 0)
+		{
+			t = env[i];
+			env[i] = string_con(con, ptr);
+			free(t);
+			return (env);
+		}
+		i++;
+	}
+	tmp = malloc((sizeof(char *) * (i + 2)));
+	for (j = 0; j < i; j++)
+	{
+		tmp[j] = env[j];
+	}
+	tmp[i] = string_con(con, ptr);
+	tmp[i + 1] = NULL;
+	free(con);
+	return (tmp);
 }

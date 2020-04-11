@@ -20,10 +20,11 @@ int _strcmp(char *s1, char *s2)
 		return (s1[i] - s2[i]);
 }
 /**
- * _strcmp - Compare strings.
+ * _strcmpn - Compare strings.
  * @s1: String 1.
  * @s2: String 2.
- * Return: number.
+ * @n: Number of position to compare starting from 0.
+ * Return: 0 to equal strings or other to error.
  */
 int _strcmpn(char *s1, char *s2, int n)
 {

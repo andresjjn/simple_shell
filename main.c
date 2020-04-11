@@ -1,6 +1,8 @@
 #include "shell.h"
 /**
  * main - Shell code with C.
+ * @argc: Number of input args.
+ * @argv: Array of parameters.
  * Return: - 0;
  */
 int main(int argc, char *argv[])
@@ -35,7 +37,7 @@ int main(int argc, char *argv[])
 		{
 			free(entrada);
 			entrada = NULL;
-			return(EXIT_SUCCESS);
+			return (EXIT_SUCCESS);
 		}
 		argumento = split_string(entrada, ' ');
 		if (built_ins(argumento, env))
