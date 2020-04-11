@@ -44,7 +44,7 @@ int exec(char **argumento, char **env)
 			s = NULL;
 			i++;
 		}
-		
+		exit(0);
 	}
 	free_argument(argumento);
 	free_argument(path);

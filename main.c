@@ -45,10 +45,16 @@ int main(int argc, char *argv[])
 		if (built_ins(argumento, env))
 			continue;
 		exec(argumento, env);
+		if (!entrada)
+		{
+			free(entrada);
+			entrada = NULL;
+		}
+	}
+	if (!entrada)
+	{
 		free(entrada);
 		entrada = NULL;
 	}
-	free(entrada);
-	entrada = NULL;
 	return (0);
 }

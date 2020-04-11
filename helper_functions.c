@@ -88,10 +88,7 @@ char *clean_string(char *entrada, int len)
 			}
 		}
 		if (entrada[i] != '\n' && !new)
-		{
-			printf("Entró y len = %d\n", len);
 			new = malloc((len) * sizeof(char));
-		}
 		if (entrada[i] != '\n')
 			new[j++] = entrada[i++];
 		else
