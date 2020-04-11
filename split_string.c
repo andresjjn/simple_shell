@@ -15,7 +15,7 @@ char **split_string(char *entrada, char d)
 	for (i = 0; entrada[i] != '\0'; i++)
 		if (entrada[i] == d)
 			j++;
-	argumento = malloc((sizeof(char *) * j) + 8);
+	argumento = malloc(sizeof(char *) * (j + 1));
 	for (i = 0; i < number;)
 	{
 		if (i == 0 || entrada[i++] == d)
@@ -24,7 +24,7 @@ char **split_string(char *entrada, char d)
 			len = 0;
 			while (entrada[j] != d && entrada[j] != 0)
 				len++, j++;
-			argumento[k] = malloc((sizeof(char) * len) + 2);
+			argumento[k] = malloc(sizeof(char) * (len + 1));
 			j = 0;
 			while (entrada[i] != d && entrada[j] != 0)
 				argumento[k][j++] = entrada[i++];

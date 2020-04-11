@@ -17,20 +17,13 @@ int exec(char **argumento)
 		wait(NULL);
 	if (chinga == 0)
 	{
-		if (_strcmp(argumento[0], "/bin/cd") != 0)
+		if (!stat(argumento[0], &stats))
 		{
-			if (!stat(argumento[0], &stats))
+			if (execve(argumento[0], argumento, NULL) == -1)
 			{
-				if (execve(argumento[0], argumento, NULL) == -1)
-				{
-					_puts("Error: Imposible to execute that command\n");
-					return (-1);
-				}
+				_puts("Error: Imposible to execute that command\n");
+				return (-1);
 			}
-		}
-		else
-		{
-			chdir(argumento[1]);
 		}
 	}
 	free_argument(argumento);

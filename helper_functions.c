@@ -88,13 +88,17 @@ char *clean_string(char *entrada, int len)
 			}
 		}
 		if (entrada[i] != '\n' && !new)
-			new = malloc(len + 1);
+		{
+			printf("Entró y len = %d\n", len);
+			new = malloc((len) * sizeof(char));
+		}
 		if (entrada[i] != '\n')
 			new[j++] = entrada[i++];
 		else
 			i++;
 	}
 	free(entrada);
+	entrada = NULL;
 	if (new)
 		new[j] = 0;
 	return (new);

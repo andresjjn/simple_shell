@@ -36,13 +36,17 @@ int main(int argc, char *argv[])
 		if (_strcmp(entrada, "exit") == 0)
 		{
 			free(entrada);
+			free_argument(env);
 			entrada = NULL;
-			return (EXIT_SUCCESS);
+			fflush(stdout);
+              		exit(0);
 		}
 		argumento = split_string(entrada, ' ');
 		if (built_ins(argumento, env))
 			continue;
 		exec(argumento);
+		free(entrada);
+		entrada = NULL;
 	}
 	free(entrada);
 	entrada = NULL;
