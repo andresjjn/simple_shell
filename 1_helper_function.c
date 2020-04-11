@@ -74,19 +74,20 @@ char *_getenv(char *arg, char **env)
  */
 char **cpy_env(void)
 {
-	int i = 0, j = 0;
+	int i = 0, j = 0, k = 0;
 	char **new;
 
 	while (environ[i])
 		i++;
 	if (environ)
-		new = malloc((i + 1) * sizeof(void *));
+		new = malloc(sizeof(char *) * (i + 1));
 	if (!new)
 		return (new);
 	i = 0;
 	while (environ[i])
 	{
-		new[i] = malloc((_strlen(environ[i]) + 1)* sizeof(char));
+		k = _strlen(environ[i]);
+		new[i] = malloc(sizeof(char) * (k + 1));
 		if (!new[i])
 		{
 			free_argument(new);
@@ -98,10 +99,10 @@ char **cpy_env(void)
 			new[i][j] = environ[i][j];
 			j++;
 		}
-		new[i][j] = 0;
+		new[i][j] = '\0';
 		i++;
 	}
-	new[i] = 0;
+	new[i] = NULL;
 	return (new);
 }
 

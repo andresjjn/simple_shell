@@ -32,19 +32,23 @@ int exec(char **argumento, char **env)
 				free(s1);
 				s1 = NULL;
 			}
-			if (!stat(s, &stats))
+			if (access(s, X_OK) == 0)
 			{
-				if (execve(s, argumento, NULL) != -1)
+				printf("Entró a access");
+				if (!stat(s, &stats))
 				{
-					free(s);
-					s = NULL;
-					break;
+					if (execve(s, argumento, NULL) != -1)
+					{
+						free(s);
+						s = NULL;
+						break;
+					}
 				}
 			}
-			free(s);
-			s = NULL;
 			i++;
 		}
+		free_argument(argumento);
+		free_argument(path);
 		exit(0);
 	}
 	free_argument(argumento);

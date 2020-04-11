@@ -20,14 +20,17 @@ char **split_string(char *entrada, char d)
 	{
 		if (i == 0 || entrada[i++] == d)
 		{
-			j = i;
 			len = 0;
-			while (entrada[j] != d && entrada[j] != 0)
-				len++, j++;
+			while (entrada[len] && entrada[len] != d)
+				len++;
 			argumento[k] = malloc(sizeof(char) * (len + 1));
-			j = 0;
-			while (entrada[i] != d && entrada[j] != 0)
-				argumento[k][j++] = entrada[i++];
+			if (!argumento[k])
+			{
+				free_argument(argumento);
+				return(NULL);
+			}
+			for (j = 0; entrada[j] && entrada[j] != d; i++, j++)
+				argumento[k][j] = entrada[i];
 			argumento[k][j] = 0;
 			k++;
 			argumento[k] = NULL;

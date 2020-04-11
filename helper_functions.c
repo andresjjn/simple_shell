@@ -97,7 +97,11 @@ char *clean_string(char *entrada, int len)
 		if (entrada[i] != '\n' && !new)
 			new = malloc((len - k) * sizeof(char));
 		if (entrada[i] != '\n')
-			new[j++] = entrada[i++];
+		{
+			new[j] = entrada[i];
+			j++;
+			i++;
+		}
 		else
 			i++;
 	}
