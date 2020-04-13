@@ -9,14 +9,11 @@ int main(int argc, char *argv[])
 {
 	size_t bytes = 0;
 	char *entrada = NULL;
-	char path[PATH_MAX];
 	char **argumento = NULL, **env = NULL;
 	int lectura = 0;
 
 	if (argc != 1)
-	{
 		exit(127);
-	}
 	env = cpy_env();
 	signal(SIGINT, sigint_h);
 	while (1)
@@ -32,31 +29,20 @@ int main(int argc, char *argv[])
 			continue;
 		if (_strcmp(entrada, "exit") == 0)
 		{
-			free(entrada);
-			free_argument(env);
-			entrada = NULL;
+			free_all(entrada, env);
 			fflush(stdout);
 			exit(0);
 		}
 		argumento = split_string(entrada, ' ');
 		if (built_ins(argumento, env))
-			{
-				free(entrada);
-				entrada = NULL;
-				continue;
-			}
-		exec(argumento, env, argv[0]);
-		if (entrada)
 		{
-			free(entrada);
-			entrada = NULL;
+			simple_free(&entrada);
+			continue;
 		}
+		exec(argumento, env, argv[0]);
+		simple_free(&entrada);
 	}
-	if (entrada)
-	{
-		free(entrada);
-		entrada = NULL;
-	}
+	simple_free(&entrada);
 	return (0);
 }
 /**

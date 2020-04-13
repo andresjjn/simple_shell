@@ -23,9 +23,9 @@ int built_ins(char **argumento, char **env)
 		{
 			s = string_con(env[i], "\n");
 			_puts(s);
-			free(s);
-			s = NULL;
+			simple_free(&s);
 		}
+		free_argument(argumento);
 		return (1);
 	}
 	if (!_strcmp(argumento[0], "setenv"))

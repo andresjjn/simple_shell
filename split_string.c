@@ -55,3 +55,25 @@ void free_argument(char **argumento)
 	free(argumento);
 	argumento = NULL;
 }
+/**
+ * simple_free - free a pointer
+ * @entrada: pointer to free.
+ */
+void simple_free(char **entrada)
+{
+	if (entrada[0])
+	{
+		free(entrada[0]);
+		entrada[0] = NULL;
+	}
+}
+/**
+ * free_all - free everything.
+ * @entrada: pointer to free.
+ * @argumento: double pointer to free.
+ */
+void free_all(char *entrada, char **argumento)
+{
+	simple_free(&entrada);
+	free_argument(argumento);
+}

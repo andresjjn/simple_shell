@@ -4,6 +4,7 @@
  * exec - Excecute a command with flags.
  * @argumento: Double pointer with command info.
  * @env: Enviroment variable.
+ * @name: Program name.
  * Return: 0 works or -1 error.
  */
 int exec(char **argumento, char **env, char *name)
@@ -21,13 +22,9 @@ int exec(char **argumento, char **env, char *name)
 	if (chinga == 0)
 	{
 		if (!stat(argumento[0], &stats))
-		{
-				execve(argumento[0], argumento, env);
-				free_argument(argumento);
-				exit(0);
-		}
+			execve(argumento[0], argumento, env);
 		path = find_path(env);
-		while (path[i])
+		for (i = 0; path[i]; i++)
 		{
 			if (path[i][_strlen(path[i])] == '/')
 				s = string_con(path[i], argumento[0]);
@@ -35,33 +32,17 @@ int exec(char **argumento, char **env, char *name)
 			{
 				s1 = string_con(path[i], "/");
 				s = string_con(s1, argumento[0]);
-				free(s1);
-				s1 = NULL;
+				simple_free(&s1);
 			}
 			if (access(s, X_OK) == 0)
-			{
 				if (!stat(s, &stats))
-				{
-					if (execve(s, argumento, env) != -1)
-					{
-						free(s);
-						s = NULL;
-						break;
-					}
-				}
-			}
-			i++;
+					execve(s, argumento, env);
 		}
 		if (stat(s, &stats))
-			{
-				_puts(name);
-				_puts(": 1: ");
-				_puts(argumento[0]);
-				_puts(": not found\n");
-			}
+			not_found(name, argumento);
 		free_argument(argumento);
 		free_argument(path);
-		exit(0);
+		exit(127);
 	}
 	free_argument(argumento);
 	free_argument(path);
@@ -80,4 +61,16 @@ char **find_path(char **env)
 	s = _getenv("PATH", env);
 	path = split_string(s, ':');
 	return (path);
+}
+/**
+ * not_found - print when don't found a command
+ * @name: name of program.
+ * @argumento: command.
+ */
+void not_found(char *name, char **argumento)
+{
+	_puts(name);
+	_puts(": 1: ");
+	_puts(argumento[0]);
+	_puts(": not found\n");
 }
