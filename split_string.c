@@ -8,33 +8,31 @@
 
 char **split_string(char *entrada, char d)
 {
-	int i = 0, j = 1, k = 0, len = 0, number = 0;
+	int i = 0, j = 1, k = 0, len = 0, n  = 0;
 	char **argumento = NULL;
 
-	number = _strlen(entrada);
+	n = _strlen(entrada);
 	for (i = 0; entrada[i] != '\0'; i++)
 		if (entrada[i] == d)
 			j++;
 	argumento = malloc(sizeof(char *) * (j + 1));
-	for (i = 0; i < number;)
+	for (i = 0; i < n && entrada[i]; i++)
 	{
-		if (i == 0 || entrada[i++] == d)
+		len = 0;
+		j = i;
+		while (entrada[j] && entrada[j] != d)
+			len++, j++;
+		argumento[k] = malloc(sizeof(char) * (len + 1));
+		if (!argumento[k])
 		{
-			len = 0;
-			while (entrada[len] && entrada[len] != d)
-				len++;
-			argumento[k] = malloc(sizeof(char) * (len + 1));
-			if (!argumento[k])
-			{
-				free_argument(argumento);
-				return(NULL);
-			}
-			for (j = 0; entrada[j] && entrada[j] != d; i++, j++)
-				argumento[k][j] = entrada[i];
-			argumento[k][j] = 0;
-			k++;
-			argumento[k] = NULL;
+			free_argument(argumento);
+			return (NULL);
 		}
+		for (j = 0; entrada[i] && entrada[i] != d; i++, j++)
+			argumento[k][j] = entrada[i];
+		argumento[k][j] = 0;
+		k++;
+		argumento[k] = NULL;
 	}
 	return (argumento);
 }

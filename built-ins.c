@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * built_in - Commands without PATH.
+ * built_ins - Commands without PATH.
  * @argumento: Double pointer with input args.
  * @env: Enviroment variable.
  * Return: Integer of success or failure.
@@ -14,6 +14,7 @@ int built_ins(char **argumento, char **env)
 	if (!_strcmp(argumento[0], "cd"))
 	{
 		cd_built_in(argumento, env);
+		free_argument(argumento);
 		return (1);
 	}
 	if (!_strcmp(argumento[0], "env"))
@@ -52,6 +53,7 @@ int built_ins(char **argumento, char **env)
 /**
  * cd_built_in - Funtion to use chdir command.
  * @argumento: Double pointer with input args.
+ * @env: Enviroment variable.
  * Return: Integer of success or failure.
  */
 int cd_built_in(char **argumento, char **env)
@@ -62,7 +64,6 @@ int cd_built_in(char **argumento, char **env)
 	{
 		dir = _getenv("HOME", env);
 		chdir(dir);
-		free_argument(argumento);
 		return (1);
 	}
 	if (!_strcmp(argumento[1], "-"))

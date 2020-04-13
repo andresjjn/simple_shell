@@ -6,7 +6,7 @@
  * @env: Enviroment variable.
  * Return: 0 works or -1 error.
  */
-int exec(char **argumento, char **env)
+int exec(char **argumento, char **env, char *name)
 {
 	pid_t chinga = 0;
 	struct stat stats;
@@ -20,6 +20,12 @@ int exec(char **argumento, char **env)
 		wait(NULL);
 	if (chinga == 0)
 	{
+		if (!stat(argumento[0], &stats))
+		{
+				execve(argumento[0], argumento, env);
+				free_argument(argumento);
+				exit(0);
+		}
 		path = find_path(env);
 		while (path[i])
 		{
@@ -34,10 +40,9 @@ int exec(char **argumento, char **env)
 			}
 			if (access(s, X_OK) == 0)
 			{
-				printf("Entró a access");
 				if (!stat(s, &stats))
 				{
-					if (execve(s, argumento, NULL) != -1)
+					if (execve(s, argumento, env) != -1)
 					{
 						free(s);
 						s = NULL;
@@ -47,6 +52,13 @@ int exec(char **argumento, char **env)
 			}
 			i++;
 		}
+		if (stat(s, &stats))
+			{
+				_puts(name);
+				_puts(": 1: ");
+				_puts(argumento[0]);
+				_puts(": not found\n");
+			}
 		free_argument(argumento);
 		free_argument(path);
 		exit(0);

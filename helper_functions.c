@@ -76,10 +76,10 @@ char *clean_string(char *entrada, int len)
 	while (entrada[i] == ' ')
 		i++, k++;
 	t = i;
-	while (entrada[t])    
+	while (entrada[t])
 	{
 		if (entrada[t] == ' ' && entrada[t + 1] == ' ')
-        	k++;
+			k++;
 		t++;
 	}
 	while (entrada[i])

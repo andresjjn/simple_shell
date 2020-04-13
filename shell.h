@@ -14,9 +14,10 @@
 
 extern char **environ;
 
+void sigint_h(int);
 char **split_string(char *entrada, char d);
 void free_argument(char **argumento);
-int exec(char **argumento, char **env);
+int exec(char **argumento, char **env, char *name);
 char *clean_string(char *entrada, int len);
 int _putchar(char c);
 void _puts(char *str);
