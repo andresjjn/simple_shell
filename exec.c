@@ -73,7 +73,5 @@ char **find_path(char **env)
 void not_found(char *name, char **argumento)
 {
 	_puts(name);
-	_puts(": 1: ");
-	_puts(argumento[0]);
-	_puts(": not found\n");
+	_puts(": No such file or directory\n");
 }
