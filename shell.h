@@ -36,5 +36,7 @@ int _steven(char **env, char **argumento, int n);
 char **find_path(char **env);
 void free2(char **ptr, char **str);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+int _putchar2(char c);
+void _puts2(char *str);
 
 #endif /* SHELL_H */
