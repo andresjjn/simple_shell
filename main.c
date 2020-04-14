@@ -23,7 +23,10 @@ int main(int argc, char *argv[])
 			_puts("$ ");
 		lectura = getline(&entrada, &bytes, stdin);
 		if (lectura == -1)
+		{
+			_puts("\n");
 			break;
+		}
 		entrada = clean_string(entrada, lectura);
 		if (!entrada)
 			continue;
@@ -42,7 +45,7 @@ int main(int argc, char *argv[])
 		exec(argumento, env, argv[0]);
 		simple_free(&entrada);
 	}
-	simple_free(&entrada);
+	free_all(entrada, env);
 	return (0);
 }
 /**
