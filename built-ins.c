@@ -8,8 +8,8 @@
  */
 int built_ins(char **argumento, char **env)
 {
-	int i;
-	char *s = NULL, **tmp = NULL;
+	int i = 0;
+	char *s = NULL;
 
 	if (!_strcmp(argumento[0], "cd"))
 	{
@@ -30,10 +30,11 @@ int built_ins(char **argumento, char **env)
 	}
 	if (!_strcmp(argumento[0], "setenv"))
 	{
-		tmp = _steven(argumento[1], argumento[2], env);
-		if (tmp != NULL)
-			env = tmp;
-		free(tmp);
+		while (argumento[i])
+			i++;
+		_steven(env, argumento, i);
+		free_argument(argumento);
+		return(1);
 	}
 
 	/*

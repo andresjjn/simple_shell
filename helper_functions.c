@@ -73,8 +73,11 @@ char *clean_string(char *entrada, int len)
 	char *new = NULL;
 	int i = 0, j = 0, k = 0, t = 0;
 
-	while (entrada[i] == ' ')
+	while (entrada[i] == ' ' || entrada[i] == '\t')
 		i++, k++;
+	for (t = 0; entrada[t]; t++)
+		if (entrada[t] == '\t')
+			entrada[t] = ' ';
 	for (t = i; entrada[t]; t++)
 		if (entrada[t] == ' ' && entrada[t + 1] == ' ')
 			k++;

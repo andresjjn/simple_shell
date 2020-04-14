@@ -21,7 +21,6 @@ int exec(char **argumento, char **env, char *name)
 		wait(NULL);
 	if (chinga == 0)
 	{
-		if (access(s, X_OK) == 0)
 			if (!stat(argumento[0], &stats))
 				execve(argumento[0], argumento, env);
 		path = find_path(env);
@@ -35,6 +34,8 @@ int exec(char **argumento, char **env, char *name)
 				s = string_con(s1, argumento[0]);
 				simple_free(&s1);
 			}
+			if (argumento[0][0] == '/' || argumento[0][0] == '.')
+				break;
 			if (access(s, X_OK) == 0)
 				if (!stat(s, &stats))
 					execve(s, argumento, env);

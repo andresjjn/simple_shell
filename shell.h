@@ -32,8 +32,9 @@ char *_getenv(char *arg, char **env);
 int built_ins(char **argumento, char **env);
 int cd_built_in(char **argumento, char **env);
 char **cpy_env(void);
-char **_steven(char *name, char *ptr, char **env);
+int _steven(char **env, char **argumento, int n);
 char **find_path(char **env);
 void free2(char **ptr, char **str);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 #endif /* SHELL_H */
