@@ -76,7 +76,7 @@ char *_getenv(char *arg, char **env)
 char **cpy_env(void)
 {
 	int i = 0, j = 0, k = 0;
-	char **new;
+	char **new = NULL;
 
 	while (environ[i])
 		i++;

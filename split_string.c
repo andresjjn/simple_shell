@@ -16,6 +16,8 @@ char **split_string(char *entrada, char d)
 		if (entrada[i] == d)
 			j++;
 	argumento = malloc(sizeof(char *) * (j + 1));
+	if (!argumento)
+		return (NULL);
 	for (i = 0; i < n && entrada[i]; i++)
 	{
 		len = 0;
@@ -76,4 +78,15 @@ void free_all(char *entrada, char **argumento)
 {
 	simple_free(&entrada);
 	free_argument(argumento);
+}
+
+/**
+ * free2 - free 2 pointers.
+ * @ptr: pointer to free.
+ * @str: pointer to free.
+ */
+void free2(char **ptr, char **str)
+{
+	free_argument(ptr);
+	free_argument(str);
 }

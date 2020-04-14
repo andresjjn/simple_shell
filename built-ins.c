@@ -59,25 +59,27 @@ int built_ins(char **argumento, char **env)
 int cd_built_in(char **argumento, char **env)
 {
 	char *dir;
+	int s = 0;
 
 	if (!argumento[1])
 	{
 		dir = _getenv("HOME", env);
-		chdir(dir);
-		return (1);
+		s = chdir(dir);
+		return (s);
 	}
 	if (!_strcmp(argumento[1], "-"))
 	{
 		dir = _getenv("OLDPWD", env);
-		chdir(dir);
+		s = chdir(dir);
 		_puts(string_con(dir, "\n"));
-		return (1);
+		return (s);
 	}
 	if (!_strcmp(argumento[1], "~"))
 	{
 		dir = _getenv("HOME", env);
-		chdir(dir);
-		return (1);
+		s = chdir(dir);
+		return (s);
 	}
-	return (chdir(argumento[1]));
+	s = chdir(argumento[1]);
+	return (s);
 }

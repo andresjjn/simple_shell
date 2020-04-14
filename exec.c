@@ -37,15 +37,16 @@ int exec(char **argumento, char **env, char *name)
 			if (access(s, X_OK) == 0)
 				if (!stat(s, &stats))
 					execve(s, argumento, env);
+			if (path[i + 1])
+				simple_free(&s);
 		}
 		if (stat(s, &stats))
 			not_found(name, argumento);
-		free_argument(argumento);
-		free_argument(path);
+		simple_free(&s);
+		free2(argumento, path);
 		exit(127);
 	}
-	free_argument(argumento);
-	free_argument(path);
+	free2(argumento, path);
 	return (0);
 }
 

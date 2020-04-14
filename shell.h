@@ -34,5 +34,6 @@ int cd_built_in(char **argumento, char **env);
 char **cpy_env(void);
 char **_steven(char *name, char *ptr, char **env);
 char **find_path(char **env);
+void free2(char **ptr, char **str);
 
 #endif /* SHELL_H */

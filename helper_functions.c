@@ -75,13 +75,9 @@ char *clean_string(char *entrada, int len)
 
 	while (entrada[i] == ' ')
 		i++, k++;
-	t = i;
-	while (entrada[t])
-	{
+	for (t = i; entrada[t]; t++)
 		if (entrada[t] == ' ' && entrada[t + 1] == ' ')
 			k++;
-		t++;
-	}
 	while (entrada[i])
 	{
 		if (entrada[i] == ' ')
@@ -95,18 +91,20 @@ char *clean_string(char *entrada, int len)
 			}
 		}
 		if (entrada[i] != '\n' && !new)
+		{
 			new = malloc((len - k) * sizeof(char));
+			if (!new)
+				return (NULL);
+		}
 		if (entrada[i] != '\n')
 		{
 			new[j] = entrada[i];
-			j++;
-			i++;
+			j++, i++;
 		}
 		else
 			i++;
 	}
-	free(entrada);
-	entrada = NULL;
+	simple_free(&entrada);
 	if (new)
 		new[j] = 0;
 	return (new);
