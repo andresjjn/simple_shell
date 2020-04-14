@@ -11,7 +11,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <limits.h>
-
+#include <errno.h>
 extern char **environ;
 
 void sigint_h(int);
