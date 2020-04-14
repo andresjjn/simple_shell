@@ -106,3 +106,26 @@ char **cpy_env(void)
 	new[i] = NULL;
 	return (new);
 }
+/**
+ * print_number - Print numbers.
+ * @n: number.
+ * Return: Nothing.
+ */
+
+void print_number(int n)
+{
+	unsigned int i;
+
+	if (n < 0)
+	{
+		_putchar2('-');
+		i = -n;
+	}
+	else
+		i = n;
+	if (i / 10)
+	{
+		print_number(i / 10);
+	}
+	_putchar2('0' + i % 10);
+}

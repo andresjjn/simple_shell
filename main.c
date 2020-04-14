@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 	size_t bytes = 0;
 	char *entrada = NULL;
 	char **argumento = NULL, **env = NULL;
-	int lectura = 0;
+	int lectura = 0, count = 0;
 
 	if (argc != 1)
 		exit(127);
@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
 	signal(SIGINT, sigint_h);
 	while (1)
 	{
+		count++;
 		lectura = 0;
 		if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
 			_puts("$ ");
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
 			simple_free(&entrada);
 			continue;
 		}
-		exec(argumento, env, argv[0]);
+		exec(argumento, env, argv[0], count);
 		simple_free(&entrada);
 	}
 	free_all(entrada, env);

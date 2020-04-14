@@ -7,7 +7,7 @@
  * @name: Program name.
  * Return: 0 works or -1 error.
  */
-int exec(char **argumento, char **env, char *name)
+int exec(char **argumento, char **env, char *name, int count)
 {
 	pid_t chinga = 0;
 	struct stat stats;
@@ -43,7 +43,7 @@ int exec(char **argumento, char **env, char *name)
 				simple_free(&s);
 		}
 		if (stat(s, &stats))
-			not_found(name, argumento);
+			not_found(name, argumento, count);
 		simple_free(&s);
 		free2(argumento, path);
 		exit(127);
@@ -70,11 +70,14 @@ char **find_path(char **env)
  * @name: name of program.
  * @argumento: command.
  */
-void not_found(char *name, char **argumento)
+void not_found(char *name, char **argumento, int count)
 {
-	(void)argumento;
 	_puts2(name);
-	_puts2(": No such file or directory\n");
+	_puts2(": ");
+	print_number(count);
+	_puts2(": ");
+	_puts2(argumento[0]);
+	_puts2(": not found\n");
 }
 
 /**
