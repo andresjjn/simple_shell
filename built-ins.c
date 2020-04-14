@@ -34,9 +34,8 @@ int built_ins(char **argumento, char **env)
 			i++;
 		_steven(env, argumento, i);
 		free_argument(argumento);
-		return(1);
+		return (1);
 	}
-
 	/*
 	*if (!_strcmp(argumento[0]), "exit")
 	*{

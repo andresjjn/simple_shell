@@ -1,10 +1,10 @@
 #include "shell.h"
 /**
  * _steven - set or create a enviroment variable.
- * @name: Name of new/set variable.
- * @ptr: Pointer of new value for env.
  * @env: Enviroment variable.
- * Return: New/set of enviroment variable.
+ * @argumento: Instructions
+ * @n: number of instructions.
+ * Return: 0.
  */
 int _steven(char **env, char **argumento, int n)
 {
@@ -12,7 +12,7 @@ int _steven(char **env, char **argumento, int n)
 	int i = 0;
 
 	if (n != 3)
-		return(-1);
+		return (-1);
 	s = string_con(argumento[1], "=");
 	for (i = 0; env[i]; i++)
 	{
@@ -27,11 +27,11 @@ int _steven(char **env, char **argumento, int n)
 			return (0);
 		}
 	}
-    env = _realloc(env, i + 1, i + 2);
-    printf("%s\n", env[i]);
-    env[i] = string_con(s, argumento[2]);
-    env[i + 1] = NULL;
-    simple_free(&s);
+	env = _realloc(env, i + 1, i + 2);
+	printf("%s\n", env[i]);
+	env[i] = string_con(s, argumento[2]);
+	env[i + 1] = NULL;
+	simple_free(&s);
 	return (0);
 }
 

@@ -100,10 +100,7 @@ char *clean_string(char *entrada, int len)
 				return (NULL);
 		}
 		if (entrada[i] != '\n')
-		{
-			new[j] = entrada[i];
-			j++, i++;
-		}
+			new[j] = entrada[i], j++, i++;
 		else
 			i++;
 	}

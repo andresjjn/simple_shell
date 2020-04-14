@@ -16,21 +16,14 @@ int main(int argc, char *argv[])
 		exit(127);
 	env = cpy_env();
 	signal(SIGINT, sigint_h);
-	while (1)
+	for (; 1; lectura = 0, count++)
 	{
-		count++;
-		lectura = 0;
 		if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
 			_puts("$ ");
 		lectura = getline(&entrada, &bytes, stdin);
 		if (lectura == -1)
-		{
 			if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
-			{
-				_puts("\n");
 				break;
-			}
-		}
 		entrada = clean_string(entrada, lectura);
 		if (!entrada)
 			continue;
@@ -49,6 +42,7 @@ int main(int argc, char *argv[])
 		exec(argumento, env, argv[0], count);
 		simple_free(&entrada);
 	}
+	_puts("\n");
 	free_all(entrada, env);
 	return (0);
 }

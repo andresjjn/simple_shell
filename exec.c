@@ -5,24 +5,21 @@
  * @argumento: Double pointer with command info.
  * @env: Enviroment variable.
  * @name: Program name.
+ * @count: Counter of iterations.
  * Return: 0 works or -1 error.
  */
 int exec(char **argumento, char **env, char *name, int count)
 {
-	pid_t chinga = 0;
 	struct stat stats;
 	char **path = NULL, *s = NULL, *s1 = NULL;
 	int i = 0;
 
 	if (argumento == NULL)
 		return (-1);
-	chinga = fork();
-	if (chinga != 0)
-		wait(NULL);
-	if (chinga == 0)
+	if (fork() == 0)
 	{
-			if (!stat(argumento[0], &stats))
-				execve(argumento[0], argumento, env);
+		if (!stat(argumento[0], &stats))
+			execve(argumento[0], argumento, env);
 		path = find_path(env);
 		for (i = 0; path[i]; i++)
 		{
@@ -48,6 +45,8 @@ int exec(char **argumento, char **env, char *name, int count)
 		free2(argumento, path);
 		exit(127);
 	}
+	else
+		wait(NULL);
 	free2(argumento, path);
 	return (0);
 }
@@ -69,6 +68,7 @@ char **find_path(char **env)
  * not_found - print when don't found a command
  * @name: name of program.
  * @argumento: command.
+ * @count: counter of iterarions
  */
 void not_found(char *name, char **argumento, int count)
 {
