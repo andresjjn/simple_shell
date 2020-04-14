@@ -21,8 +21,9 @@ int exec(char **argumento, char **env, char *name)
 		wait(NULL);
 	if (chinga == 0)
 	{
-		if (!stat(argumento[0], &stats))
-			execve(argumento[0], argumento, env);
+		if (access(s, X_OK) == 0)
+			if (!stat(argumento[0], &stats))
+				execve(argumento[0], argumento, env);
 		path = find_path(env);
 		for (i = 0; path[i]; i++)
 		{
