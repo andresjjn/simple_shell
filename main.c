@@ -24,8 +24,11 @@ int main(int argc, char *argv[])
 		lectura = getline(&entrada, &bytes, stdin);
 		if (lectura == -1)
 		{
-			_puts("\n");
-			break;
+			if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
+			{
+				_puts("\n");
+				break;
+			}
 		}
 		entrada = clean_string(entrada, lectura);
 		if (!entrada)
