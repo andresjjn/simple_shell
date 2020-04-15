@@ -114,7 +114,7 @@ int exit_built_in(char **argumento, int status, char **env)
 		return(2);
 	while (argumento[1][i])
 	{
-		if ((argumento[1][i] >= '0' && argumento[1][i] <= '9') || argumento[1][0])
+		if ((argumento[1][i] >= '0' && argumento[1][i] <= '9'))
 			n = (n * 10) + (argumento[1][i] - '0');
 		else
 			return (2);
