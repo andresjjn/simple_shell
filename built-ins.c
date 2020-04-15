@@ -108,9 +108,13 @@ int exit_built_in(char **argumento, int status, char **env)
 		free2(argumento, env);
 		exit(status);
 	}
+	if (argumento[1][0] == '+')
+		i++;
+	if (!argumento[1][i])
+		return(2);
 	while (argumento[1][i])
 	{
-		if (argumento[1][i] >= '0' && argumento[1][i] <= '9')
+		if ((argumento[1][i] >= '0' && argumento[1][i] <= '9') || argumento[1][0])
 			n = (n * 10) + (argumento[1][i] - '0');
 		else
 			return (2);
