@@ -12,7 +12,7 @@ int exec(char **argumento, char **env, char *name, int count)
 {
 	struct stat stats;
 	char **path = NULL, *s = NULL, *s1 = NULL;
-	int i = 0;
+	int i = 0, status = 0;
 
 	if (argumento == NULL)
 		return (-1);
@@ -46,9 +46,9 @@ int exec(char **argumento, char **env, char *name, int count)
 		exit(127);
 	}
 	else
-		wait(NULL);
+		wait(&status);
 	free2(argumento, path);
-	return (0);
+	return (status);
 }
 
 /**

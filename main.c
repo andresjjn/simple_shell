@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 	size_t bytes = 0;
 	char *entrada = NULL;
 	char **argumento = NULL, **env = NULL;
-	int lectura = 0, count = 0;
+	int lectura = 0, count = 0, status = 0;
 
 	if (argc != 1)
 		exit(127);
@@ -27,24 +27,16 @@ int main(int argc, char *argv[])
 		entrada = clean_string(entrada, lectura);
 		if (!entrada)
 			continue;
-		if (_strcmp(entrada, "exit") == 0)
-		{
-			free_all(entrada, env);
-			fflush(stdout);
-			exit(0);
-		}
 		argumento = split_string(entrada, ' ');
-		if (built_ins(argumento, env))
-		{
-			simple_free(&entrada);
-			continue;
-		}
-		exec(argumento, env, argv[0], count);
 		simple_free(&entrada);
+		if (built_ins(argumento, env, &status))
+			continue;
+		status = exec(argumento, env, argv[0], count);
+		status = status >> 8;
 	}
 	_puts("\n");
 	free_all(entrada, env);
-	return (0);
+	return (status);
 }
 /**
  * sigint_h - In case of press CTRL + C this don't exit the shell.

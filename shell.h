@@ -29,7 +29,7 @@ int _strcmpn(char *s1, char *s2, int n);
 int _strlen(char *s);
 char *string_con(char *s1, char *s2);
 char *_getenv(char *arg, char **env);
-int built_ins(char **argumento, char **env);
+int built_ins(char **argumento, char **env, int *status);
 int cd_built_in(char **argumento, char **env);
 char **cpy_env(void);
 int _steven(char **env, char **argumento, int n);
@@ -39,5 +39,6 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void print_number(int n);
 int _putchar2(char c);
 void _puts2(char *str);
+int exit_built_in(char **argumento, int status, char **env);
 
 #endif /* SHELL_H */
