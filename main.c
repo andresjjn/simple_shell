@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 	size_t bytes = 0;
 	char *entrada = NULL;
 	char **argumento = NULL, **env = NULL;
-	int lectura = 0, count = 0, status = 0;
+	int lectura = 0, count = 1, status = 0;
 
 	if (argc != 1)
 		exit(127);
