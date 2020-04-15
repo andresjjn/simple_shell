@@ -19,7 +19,7 @@ int exec(char **argumento, char **env, char *name, int count)
 	if (fork() == 0)
 	{
 		if (!stat(argumento[0], &stats))
-			execve(argumento[0], argumento, NULL);
+			execve(argumento[0], argumento, env);
 		path = find_path(env);
 		for (i = 0; path[i]; i++)
 		{
@@ -35,7 +35,7 @@ int exec(char **argumento, char **env, char *name, int count)
 				break;
 			if (access(s, X_OK) == 0)
 				if (!stat(s, &stats))
-					execve(s, argumento, NULL);
+					execve(s, argumento, env);
 			if (path[i + 1])
 				simple_free(&s);
 		}
