@@ -22,8 +22,7 @@ int main(int argc, char *argv[])
 			_puts("$ ");
 		lectura = getline(&entrada, &bytes, stdin);
 		if (lectura == -1)
-			if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
-				break;
+			break;
 		entrada = clean_string(entrada, lectura);
 		if (!entrada)
 			continue;
@@ -34,7 +33,6 @@ int main(int argc, char *argv[])
 		status = exec(argumento, env, argv[0], count);
 		status = status >> 8;
 	}
-	_puts("\n");
 	free_all(entrada, env);
 	return (status);
 }
