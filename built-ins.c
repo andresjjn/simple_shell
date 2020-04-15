@@ -7,7 +7,7 @@
  * @status: Status for exit.
  * Return: Integer of success or failure.
  */
-int built_ins(char **argumento, char **env, int *status)
+int built_ins(char **argumento, char **env, int *status, char* name, int count)
 {
 	int i = 0;
 	char *s = NULL;
@@ -40,6 +40,11 @@ int built_ins(char **argumento, char **env, int *status)
 	if (!_strcmp(argumento[0], "exit"))
 	{
 		i = exit_built_in(argumento, *status, env);
+		if (i == 2)
+		{
+			print_error(name, argumento, count, ": Illegal number: ", argumento[1]);
+			*status = 2;
+		}
 		return (1);
 	}
 

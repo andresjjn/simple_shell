@@ -40,7 +40,7 @@ int exec(char **argumento, char **env, char *name, int count)
 				simple_free(&s);
 		}
 		if (stat(s, &stats))
-			not_found(name, argumento, count);
+			print_error(name, argumento, count, ": not found", "");
 		simple_free(&s);
 		free2(argumento, path);
 		exit(127);
@@ -65,19 +65,23 @@ char **find_path(char **env)
 	return (path);
 }
 /**
- * not_found - print when don't found a command
+ * print_error - print the erros.
  * @name: name of program.
  * @argumento: command.
- * @count: counter of iterarions
+ * @count: counter of iterarions.
+ * @msn: error message.
+ * @ar: last argument of a command.
  */
-void not_found(char *name, char **argumento, int count)
+void print_error(char *name, char **argumento, int count, char *msn, char *ar)
 {
 	_puts2(name);
 	_puts2(": ");
 	print_number(count);
 	_puts2(": ");
 	_puts2(argumento[0]);
-	_puts2(": not found\n");
+	_puts2(msn);
+	_puts2(ar);
+	_puts2("\n");
 }
 
 /**
