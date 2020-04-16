@@ -17,7 +17,6 @@ char **split_string(char *entrada, char d)
 	for (f = 0; entrada[f] && (d != ' ' || entrada[f + 1] != '#'); f++)
 		if (entrada[f] == d)
 			j++;
-	printf("ACATA %d\n", j);
 	argumento = malloc(sizeof(char *) * (j + 1));
 	if (!argumento)
 		return (NULL);
