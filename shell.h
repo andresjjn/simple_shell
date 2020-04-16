@@ -32,7 +32,7 @@ char *_getenv(char *arg, char **env);
 int built_ins(char **argumento, char **env, int *status, char* name, int count);
 int cd_built_in(char **argumento, char **env);
 char **cpy_env(void);
-int _steven(char **env, char **argumento, int n);
+int _steven(char **env, char **argumento);
 char **find_path(char **env);
 void free2(char **ptr, char **str);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);

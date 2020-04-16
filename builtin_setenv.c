@@ -3,15 +3,16 @@
  * _steven - set or create a enviroment variable.
  * @env: Enviroment variable.
  * @argumento: Instructions
- * @n: number of instructions.
  * Return: 0.
  */
-int _steven(char **env, char **argumento, int n)
+int _steven(char **env, char **argumento)
 {
 	char *s = NULL, *t = NULL;
 	int i = 0;
 
-	if (n != 3)
+	while (argumento[i])
+		i++;
+	if (i != 3)
 		return (-1);
 	s = string_con(argumento[1], "=");
 	for (i = 0; env[i]; i++)
@@ -22,6 +23,7 @@ int _steven(char **env, char **argumento, int n)
 			env[i] = string_con(s, argumento[2]);
 			simple_free(&t);
 			simple_free(&s);
+			free_argument(argumento);
 			return (0);
 		}
 	}
@@ -66,7 +68,8 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 }
 /**
  * _unsteven - Delete a enviroment variable.
- * @ar: Variable to delete.
+ * @env: Enviroment variable.
+ * @argumento: Instructions.
  * Return: 0 on succes 2 on fail.
  */
 int _unsteven(char **env, char **argumento)
@@ -94,5 +97,6 @@ int _unsteven(char **env, char **argumento)
 			return (0);
 		}
 	}
+	free_argument(argumento);
 	return (0);
 }

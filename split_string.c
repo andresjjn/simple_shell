@@ -8,7 +8,7 @@
 
 char **split_string(char *entrada, char d)
 {
-	int i = 0, j = 1, k = 0, len = 0, n  = 0, f = 0;
+	int i = 0, j = 1, k = 0, len = 0, n  = 0, f = 0, fl = 0;
 	char **argumento = NULL;
 
 	n = _strlen(entrada);
@@ -32,8 +32,14 @@ char **split_string(char *entrada, char d)
 			free_argument(argumento);
 			return (NULL);
 		}
-		for (j = 0; entrada[i] && entrada[i] != d; i++, j++)
+		for (j = 0; entrada[i] && (entrada[i] != d || fl == 1); i++, j++)
+		{
+			if (fl == 0 && entrada[i] == '"')
+				fl = 1, i++;
+			if (fl == 1 && entrada[i] == '"')
+				fl = 0, i++;
 			argumento[k][j] = entrada[i];
+		}
 		argumento[k][j] = 0;
 		k++;
 		argumento[k] = NULL;

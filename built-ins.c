@@ -33,22 +33,17 @@ int built_ins(char **argumento, char **env, int *status, char *name, int count)
 	}
 	if (!_strcmp(argumento[0], "setenv"))
 	{
-		while (argumento[i])
-			i++;
-		_steven(env, argumento, i);
-		free_argument(argumento);
+		_steven(env, argumento);
 		return (1);
 	}
 	if (!_strcmp(argumento[0], "unsetenv"))
 	{
 		_unsteven(env, argumento);
-		free_argument(argumento);
 		return (1);
 	}
 	if (!_strcmp(argumento[0], "exit"))
 	{
-		i = exit_built_in(argumento, *status, env);
-		if (i == 2)
+		if (exit_built_in(argumento, *status, env) == 2)
 		{
 			print_error(name, argumento, count, ": Illegal number: ", argumento[1]);
 			*status = 2;
@@ -170,11 +165,14 @@ int exit_built_in(char **argumento, int status, char **env)
 		if ((argumento[1][i] >= '0' && argumento[1][i] <= '9'))
 			n = (n * 10) + (argumento[1][i] - '0');
 		else
+		{
+			free2(argumento, env);
 			return (2);
+		}
 		i++;
 	}
+	free2(argumento, env);
 	exit(n);
-
 	return (1);
 }
 /**
@@ -191,13 +189,13 @@ void setenv_from_functions(char **env, char *ar1, char *ar2)
 	argumento = malloc(sizeof(char *) * (4));
 	if (!argumento)
 		return;
+	argumento[3] = NULL;
 	argumento[0] = malloc(sizeof(char *) * (_strlen(a0)) + 1);
 	if (!argumento[0])
 	{
 		free_argument(argumento);
 		return;
 	}
-	argumento[3] = NULL;
 	while (a0[i])
 	{
 		argumento[0][i] = a0[i];
@@ -222,6 +220,5 @@ void setenv_from_functions(char **env, char *ar1, char *ar2)
 	for (i = 0; ar2[i]; i++)
 		argumento[2][i] = ar2[i];
 	argumento[2][i] = 0;
-	_steven(env, argumento, 3);
-	free_argument(argumento);
+	_steven(env, argumento);
 }
