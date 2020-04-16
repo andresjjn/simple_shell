@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
 			continue;
 		argumento = split_string(entrada, ' ');
 		simple_free(&entrada);
+		if (argumento == NULL)
+			continue;
 		if (built_ins(argumento, env, &status, argv[0], count))
 			continue;
 		status = exec(argumento, env, argv[0], count);
