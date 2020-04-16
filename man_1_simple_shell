@@ -1,42 +1,44 @@
-# Simple Shell
+.TH man 1 "15 Apr 2020" "1.0" "simple_shell man page"
+.SH NAME
+simple_shell \- Is a program interpreter in between the standard input and the Linux kernel.
+.SH SYNOPSIS
+[command] [options 1] [options 2] ... [options n] [direcotry path to apply command]
+.SH DESCRIPTION
+The simple shell program is a CLI (Command Line Interface) that was coding in C language and allow the user access through the keyboard to the Linux Operating System. The purpose of this project is put into practice all knowledge got in the first trimester of basic formation in Holberton School. If you want to know more about the Holberton School, please go to: www.holbertonschool.com
+.SH COMMANDS AND EXAMPLES
+Simple shell allow the execution of the Linux operative system commands. Also include some built-in options like: 
 
-Este proyecto consiste en la proramación en legunaje C de una shell funcional que permita al usuario interactuar con el sistema operativo linux en la pc que esté siendo utilizada. El proposito de este es poner en practica los conocimientos obtenidos en el primer trimestre de formación en Holberton School. Para mas información de la academia o del proceso visita: [www.holbertonschool.com](https://www.holbertonschool.com/)
+Directory management:
 
-## Installation
+        $ cd [directory path]  = Change to a specific directory.
+        $ cd ..                = Change to pathern directory.
+        $ cd or cd ~           = Change to home directory.
 
-Para comenzar a usar esta shell, clona este repositorio:
+Exit and error management:
 
-    https://github.com/andresjjn/simple_shell.git
+Exit status is in between 0 and 255. Exit statuses from shell builtins and compound commands are also limited to this range. Under certain circumstances, the shell will use special values to indicate specific failure modes, like:
 
-Luego, para ejecutar la shell, usted deberá utilizar el compilador `gcc` de linux. Si aun no lo tiene instalado en su computadora, por favor, siga los siguientes pasos:
+         __________________________________________________________
+        | Value |                    Meaning                       |
+        |-------|--------------------------------------------------|
+        |   0   |  Successful command execution                    |
+        |-------|--------------------------------------------------|
+        |   2   |  Missing keyword, command, or permission problem |
+        |-------|--------------------------------------------------|
+        |  127  |  Possible problem with $PATH or a typo           |
+         ---------------------------------------------------------- 
 
-Update the linux packages list:
+For the simple shell purposes, a command which exits with a zero exit status has succeeded. A non-zero exit status indicates failure. This scheme is used to indicate success and a variety of ways to indicate various failure modes. All builtins return an exit status of 2 to indicate incorrect usage, generally invalid options or missing arguments. If a command is not found, the child process created to execute it returns a status of 127.
 
-```bash
-sudo apt update
-```
-Después instale el paquete build-essential,así:
+It is possible to stop the program execution using the system signal Ctrl + D. 
+.SH ENVIRONMENT VARIABLES
+When a program is invoked, it is given an array of strings called the env. This is a list of name-value pairs, of the form name=value. The values are given at the beginnig of the bash shell, and are modified when the program is running. The environment variables are information about configuration and statement parameters of the system. For example some important parameters are: actual directory (PWD), system language (LANG) and actual user(USER). That information will change with your operative system. To print the env array in this shell type: 
 
-```bash
-sudo apt install build-essential
-```
+        $ env
 
-Para verificar la instalación y la versión del compilador instalado teclee. 
-
-```bash
-gcc --version
-```
-
-Usted debería obtener algo como: 
-
-```bash
-gcc (Ubuntu 4.8.4-2ubuntu1~14.04.4) 4.8.4
-Copyright (C) 2013 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-```
-Ahora, con el compilador instalado, compile el programa de la siguiente manera:
-
-```bash
-gcc 
-```
+.SH COMMENTS
+It is possible make a comment into a line of command in simple shell program, using a word beginning with #, ignored the word and all remaining characters on that line. 
+.SH BUGS
+No known bugs.
+.SH AUTHORS
+Andres Felipe Escobar Cardona (felipeescobar15@gmail.com) and Andres Felipe Jejen Tabares (1453@holbertonschool.com)
