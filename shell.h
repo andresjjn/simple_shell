@@ -40,5 +40,8 @@ void print_number(int n);
 int _putchar2(char c);
 void _puts2(char *str);
 int exit_built_in(char **argumento, int status, char **env);
+void setenv_from_functions(char **env, char *ar1, char *ar2);
+int cd_built_in2(char **argumento, char **env);
+int _unsteven(char **env, char **argumento);
 
 #endif /* SHELL_H */

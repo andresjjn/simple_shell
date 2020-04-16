@@ -18,17 +18,14 @@ int _steven(char **env, char **argumento, int n)
 	{
 		if (!_strcmpn(s, env[i], _strlen(s)))
 		{
-			printf("%s\n", env[i]);
 			t = env[i];
 			env[i] = string_con(s, argumento[2]);
 			simple_free(&t);
-			printf("%s\n", env[i]);
 			simple_free(&s);
 			return (0);
 		}
 	}
 	env = _realloc(env, i + 1, i + 2);
-	printf("%s\n", env[i]);
 	env[i] = string_con(s, argumento[2]);
 	env[i + 1] = NULL;
 	simple_free(&s);
@@ -66,4 +63,36 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	}
 	free(ptr);
 	return (n);
+}
+/**
+ * _unsteven - Delete a enviroment variable.
+ * @ar: Variable to delete.
+ * Return: 0 on succes 2 on fail.
+ */
+int _unsteven(char **env, char **argumento)
+{
+	char *s = NULL;
+	int i = 0;
+
+	s = string_con(argumento[1], "=");
+	for (i = 0; env[i]; i++)
+	{
+		if (!_strcmpn(s, env[i], _strlen(s)))
+		{
+			simple_free(&s);
+			simple_free(&env[i]);
+			while (env[i])
+			{
+				if (env[i + 1])
+				{
+					env[i] = env[i + 1];
+					i++;
+					continue;
+				}
+				env[i + 1] = NULL;
+			}
+			return (0);
+		}
+	}
+	return (0);
 }
