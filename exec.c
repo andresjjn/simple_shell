@@ -3,12 +3,11 @@
 /**
  * exec - Excecute a command with flags.
  * @argumento: Double pointer with command info.
- * @env: Enviroment variable.
  * @name: Program name.
  * @count: Counter of iterations.
  * Return: 0 works or -1 error.
  */
-int exec(char **argumento, char **env, char *name, int count)
+int exec(char **argumento, char *name, int count)
 {
 	struct stat stats;
 	char **path = NULL, *s = NULL, *s1 = NULL;
@@ -20,7 +19,7 @@ int exec(char **argumento, char **env, char *name, int count)
 	{
 		if (!stat(argumento[0], &stats))
 			execve(argumento[0], argumento, env);
-		path = find_path(env);
+		path = find_path();
 		for (i = 0; path[i]; i++)
 		{
 			if (path[i][_strlen(path[i])] == '/')
@@ -53,14 +52,13 @@ int exec(char **argumento, char **env, char *name, int count)
 
 /**
  * find_path - Split by arrays the paths into env
- * @env: Enviroment variable.
  * Return: Double pointer with paths.
  */
-char **find_path(char **env)
+char **find_path(void)
 {
 	char **path = NULL, *s = NULL;
 
-	s = _getenv("PATH", env);
+	s = _getenv("PATH");
 	path = split_string(s, ':');
 	return (path);
 }

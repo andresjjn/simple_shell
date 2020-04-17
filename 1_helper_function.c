@@ -53,15 +53,14 @@ char *string_con(char *s1, char *s2)
 /**
  * _getenv - Get a specific line of path.
  * @arg: Parameter to search in env.
- * @env: Enviroment variable.
  * Return: Pinter with value required.
  */
-char *_getenv(char *arg, char **env)
+char *_getenv(char *arg)
 {
 	int i = 0, j = 0;
 
 	i = _strlen(arg);
-	while (environ[j])
+	while (env[j])
 	{
 		if (_strcmpn(env[j], arg, i) == 0 && env[j][i] == '=')
 			break;

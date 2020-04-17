@@ -3,20 +3,19 @@
 /**
  * built_ins - Commands without PATH.
  * @argumento: Double pointer with input args.
- * @env: Enviroment variable.
  * @status: Status for exit.
  * @name: Name of the program.
  * @count: Iteration count.
  * Return: Integer of success or failure.
  */
-int built_ins(char **argumento, char **env, int *status, char *name, int count)
+int built_ins(char **argumento, int *status, char *name, int count)
 {
 	int i = 0;
 	char *s = NULL;
 
 	if (!_strcmp(argumento[0], "cd"))
 	{
-		*status = cd_built_in(argumento, env);
+		*status = cd_built_in(argumento);
 		free_argument(argumento);
 		return (1);
 	}
@@ -33,17 +32,17 @@ int built_ins(char **argumento, char **env, int *status, char *name, int count)
 	}
 	if (!_strcmp(argumento[0], "setenv"))
 	{
-		_steven(env, argumento);
+		*status = _steven(argumento);
 		return (1);
 	}
 	if (!_strcmp(argumento[0], "unsetenv"))
 	{
-		_unsteven(env, argumento);
+		_unsteven(argumento);
 		return (1);
 	}
 	if (!_strcmp(argumento[0], "exit"))
 	{
-		if (exit_built_in(argumento, *status, env) == 2)
+		if (exit_built_in(argumento, *status) == 2)
 		{
 			print_error(name, argumento, count, ": Illegal number: ", argumento[1]);
 			*status = 2;
@@ -56,10 +55,9 @@ int built_ins(char **argumento, char **env, int *status, char *name, int count)
 /**
  * cd_built_in - Funtion to use chdir command.
  * @argumento: Double pointer with input args.
- * @env: Enviroment variable.
  * Return: Integer of success or failure.
  */
-int cd_built_in(char **argumento, char **env)
+int cd_built_in(char **argumento)
 {
 	char *dir = NULL, *current = NULL;
 	int s = 0, i = 0;
@@ -68,7 +66,7 @@ int cd_built_in(char **argumento, char **env)
 	current = getcwd(path, sizeof(path));
 	if (!argumento[1])
 	{
-		dir = _getenv("HOME", env);
+		dir = _getenv("HOME");
 		if (_strcmp(dir, current))
 			i = 1;
 		s = chdir(dir);
@@ -76,14 +74,14 @@ int cd_built_in(char **argumento, char **env)
 			return (2);
 		if (i)
 		{
-			setenv_from_functions(env, "OLDPWD", current);
-			setenv_from_functions(env, "PWD", getcwd(path, sizeof(path)));
+			setenv_from_functions("OLDPWD", current);
+			setenv_from_functions("PWD", getcwd(path, sizeof(path)));
 		}
 		return (s);
 	}
 	if (!_strcmp(argumento[1], "-"))
 	{
-		dir = _getenv("OLDPWD", env);
+		dir = _getenv("OLDPWD");
 		s = chdir(dir);
 		dir = string_con(dir, "\n");
 		_puts(dir);
@@ -92,21 +90,20 @@ int cd_built_in(char **argumento, char **env)
 			simple_free(&dir);
 			return (2);
 		}
-		setenv_from_functions(env, "OLDPWD", current);
-		setenv_from_functions(env, "PWD", getcwd(path, sizeof(path)));
+		setenv_from_functions("OLDPWD", current);
+		setenv_from_functions("PWD", getcwd(path, sizeof(path)));
 		simple_free(&dir);
 		return (s);
 	}
-	s = cd_built_in2(argumento, env);
+	s = cd_built_in2(argumento);
 	return (s);
 }
 /**
  * cd_built_in2 - Funtion to use chdir command.
  * @argumento: Double pointer with input args.
- * @env: Enviroment variable.
  * Return: Integer of success or failure.
  */
-int cd_built_in2(char **argumento, char **env)
+int cd_built_in2(char **argumento)
 {
 	char *dir = NULL, *current = NULL;
 	int s = 0, i = 0;
@@ -115,7 +112,7 @@ int cd_built_in2(char **argumento, char **env)
 	current = getcwd(path, sizeof(path));
 	if (!_strcmp(argumento[1], "~"))
 	{
-		dir = _getenv("HOME", env);
+		dir = _getenv("HOME");
 		if (_strcmp(dir, current))
 			i = 1;
 		s = chdir(dir);
@@ -123,8 +120,8 @@ int cd_built_in2(char **argumento, char **env)
 			return (2);
 		if (i)
 		{
-			setenv_from_functions(env, "OLDPWD", current);
-			setenv_from_functions(env, "PWD", getcwd(path, sizeof(path)));
+			setenv_from_functions("OLDPWD", current);
+			setenv_from_functions("PWD", getcwd(path, sizeof(path)));
 		}
 		return (s);
 	}
@@ -135,8 +132,8 @@ int cd_built_in2(char **argumento, char **env)
 		return (2);
 	if (i)
 	{
-		setenv_from_functions(env, "OLDPWD", current);
-		setenv_from_functions(env, "PWD", getcwd(path, sizeof(path)));
+		setenv_from_functions("OLDPWD", current);
+		setenv_from_functions("PWD", getcwd(path, sizeof(path)));
 	}
 	return (s);
 }
@@ -144,10 +141,9 @@ int cd_built_in2(char **argumento, char **env)
  * exit_built_in - Function that controls the exit
  * @argumento: Double pointer with the instructions.
  * @status: status for the exit.
- * @env: Enviroment variable.
  * Return: 1.
  */
-int exit_built_in(char **argumento, int status, char **env)
+int exit_built_in(char **argumento, int status)
 {
 	int n = 0, i = 0;
 
@@ -177,11 +173,10 @@ int exit_built_in(char **argumento, int status, char **env)
 }
 /**
  * setenv_from_functions - functions for setenv from other functions.
- * @env: Enviroment variable.
  * @ar1: Argumento 1.
  * @ar2: Argumento 2.
  */
-void setenv_from_functions(char **env, char *ar1, char *ar2)
+void setenv_from_functions(char *ar1, char *ar2)
 {
 	char **argumento = NULL, *a0 = "setenv";
 	int i = 0;
@@ -220,5 +215,5 @@ void setenv_from_functions(char **env, char *ar1, char *ar2)
 	for (i = 0; ar2[i]; i++)
 		argumento[2][i] = ar2[i];
 	argumento[2][i] = 0;
-	_steven(env, argumento);
+	_steven(argumento);
 }

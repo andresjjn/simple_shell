@@ -8,23 +8,23 @@
 
 char **split_string(char *entrada, char d)
 {
-	int i = 0, j = 1, k = 0, len = 0, n  = 0, f = 0, fl = 0;
+	int i = 0, j = 1, k = 0, len = 0, n  = 0, f = 0;
 	char **argumento = NULL;
 
 	n = _strlen(entrada);
 	if (entrada[0] == '#' && d == ' ')
 		return (argumento);
-	for (f = 0; entrada[f] && (d != ' ' || entrada[f + 1] != '#'); f++)
-		if (entrada[f] == d)
-			j++;
+	for (f = 0; entrada[f] && ((d != ' ' ||
+	(entrada[f + 1] && entrada[f + 1] != '#'))); f++)
+		j++;
 	argumento = malloc(sizeof(char *) * (j + 1));
 	if (!argumento)
 		return (NULL);
-	for (i = 0; i < n && entrada[i] && i <= f; i++)
+	for (len = 0, i = 0; i < n && entrada[i] && i <= f; i++)
 	{
 		len = 0;
 		j = i;
-		while (entrada[j] && entrada[j] != d)
+		for (; entrada[j] && (entrada[j] != d);)
 			len++, j++;
 		argumento[k] = malloc(sizeof(char) * (len + 1));
 		if (!argumento[k])
@@ -32,19 +32,11 @@ char **split_string(char *entrada, char d)
 			free_argument(argumento);
 			return (NULL);
 		}
-		for (j = 0; entrada[i] && (entrada[i] != d || fl == 1); i++, j++)
-		{
-			if (fl == 0 && entrada[i] == '"')
-				fl = 1, i++;
-			if (fl == 1 && entrada[i] == '"')
-				fl = 0, i++;
+		for (j = 0; entrada[i] && (entrada[i] != d); i++, j++)
 			argumento[k][j] = entrada[i];
-		}
 		argumento[k][j] = 0;
 		k++;
 		argumento[k] = NULL;
-		if (d == ' ' && entrada[i] == '#')
-			break;
 	}
 	return (argumento);
 }

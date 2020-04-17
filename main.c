@@ -5,11 +5,12 @@
  * @argv: Array of parameters.
  * Return: - 0;
  */
+
 int main(int argc, char *argv[])
 {
 	size_t bytes = 0;
 	char *entrada = NULL;
-	char **argumento = NULL, **env = NULL;
+	char **argumento = NULL;
 	int lectura = 0, count = 1, status = 0;
 
 	if (argc != 1)
@@ -30,9 +31,9 @@ int main(int argc, char *argv[])
 		simple_free(&entrada);
 		if (argumento == NULL)
 			continue;
-		if (built_ins(argumento, env, &status, argv[0], count))
+		if (built_ins(argumento, &status, argv[0], count))
 			continue;
-		status = exec(argumento, env, argv[0], count);
+		status = exec(argumento, argv[0], count);
 		status = status >> 8;
 	}
 	free_all(entrada, env);
