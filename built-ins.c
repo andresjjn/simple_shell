@@ -10,8 +10,6 @@
  */
 int built_ins(char **argumento, int *status, char *name, int count)
 {
-	int i = 0;
-	char *s = NULL;
 
 	if (!_strcmp(argumento[0], "cd"))
 	{
@@ -21,12 +19,7 @@ int built_ins(char **argumento, int *status, char *name, int count)
 	}
 	if (!_strcmp(argumento[0], "env"))
 	{
-		for (i = 0; env[i]; i++)
-		{
-			s = string_con(env[i], "\n");
-			_puts(s);
-			simple_free(&s);
-		}
+		_env();
 		free_argument(argumento);
 		return (1);
 	}

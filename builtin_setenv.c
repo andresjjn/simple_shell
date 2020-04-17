@@ -11,8 +11,12 @@ int _steven(char **argumento)
 
 	while (argumento[i])
 		i++;
-	if (i != 3)
-		return (2);
+	if (i < 3)
+	{
+		free_argument(argumento);
+		_env();
+		return (1);
+	}
 	s = string_con(argumento[1], "=");
 	for (i = 0; env[i]; i++)
 	{
@@ -75,4 +79,20 @@ int _unsteven(char **argumento)
 	}
 	free_argument(argumento);
 	return (1);
+}
+
+/**
+ * _env - Print enviroment variable.
+ */
+void _env(void)
+{
+	char *s = NULL;
+	int i = 0;
+
+	for (i = 0; env[i]; i++)
+	{
+		s = string_con(env[i], "\n");
+		_puts(s);
+		simple_free(&s);
+	}
 }

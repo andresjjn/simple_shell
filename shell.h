@@ -43,5 +43,6 @@ int exit_built_in(char **argumento, int status);
 void setenv_from_functions(char *ar1, char *ar2);
 int cd_built_in2(char **argumento);
 int _unsteven(char **argumento);
+void _env(void);
 
 #endif /* SHELL_H */
