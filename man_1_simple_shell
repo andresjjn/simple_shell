@@ -29,7 +29,6 @@ Exit status is in between 0 and 255. Exit statuses from shell builtins and compo
          ---------------------------------------------------------- 
 
 For the simple shell purposes, a command which exits with a zero exit status has succeeded. A non-zero exit status indicates failure. This scheme is used to indicate success and a variety of ways to indicate various failure modes. All builtins return an exit status of 2 to indicate incorrect usage, generally invalid options or missing arguments. If a command is not found, the child process created to execute it returns a status of 127.
-
 It is possible to stop the program execution using the system signal Ctrl + D. 
 .SH ENVIRONMENT VARIABLES
 When a program is invoked, it is given an array of strings called the env. This is a list of name-value pairs, of the form name=value. The values are given at the beginnig of the bash shell, and are modified when the program is running. The environment variables are information about configuration and statement parameters of the system. For example some important parameters are: actual directory (PWD), system language (LANG) and actual user(USER). That information will change with your operative system. To print the env array in this shell type: 
