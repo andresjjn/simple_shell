@@ -14,8 +14,8 @@ char **split_string(char *entrada, char d)
 	n = _strlen(entrada);
 	if (entrada[0] == '#' && d == ' ')
 		return (argumento);
-	for (f = 0; entrada[f] && ((d != ' ' ||
-	(entrada[f + 1] && entrada[f + 1] != '#'))); f++)
+	for (f = 0; entrada[f] && (((d != ' ' || (entrada[f + 1] &&
+	entrada[f + 1] != '#'))) || entrada[f] != ' '); f++)
 		j++;
 	argumento = malloc(sizeof(char *) * (j + 1));
 	if (!argumento)
