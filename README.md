@@ -1,6 +1,6 @@
 # Simple Shell
 
-The simple shell program is a CLI (Command Line Interface) that was coding in C language and allow the user access through the keyboard to the Linux Operating System. The purpose of this project is put into practice all knowledge got in the first trimester of basic formation in Holberton School. If you want to know more about the Holberton School, please go to: [www.holbertonschool.com](https://www.holbertonschool.com/).
+The simple shell program is a CLI (Command Line Interface) that was coding in C language and allow the user access through the keyboard to the Linux Operating System. The purpose of this project is put into practice all knowledge got in the first trimester of basic formation in Holberton School. If you want to know more about the Holberton School, please go to: [www.holbertonschool.com](https://www.holbertonschool.com/)
 
 ## Installation
 
