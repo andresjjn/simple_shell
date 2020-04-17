@@ -17,7 +17,8 @@ int exec(char **argumento, char *name, int count)
 		return (-1);
 	if (fork() == 0)
 	{
-		if (!stat(argumento[0], &stats) && (argumento[0][0] == '/' || argumento[0][0] == '.'))
+		if (!stat(argumento[0], &stats) && (argumento[0][0] == '/' ||
+		argumento[0][0] == '.'))
 			execve(argumento[0], argumento, env);
 		path = find_path();
 		for (i = 0; path[i]; i++)
