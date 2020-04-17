@@ -70,9 +70,9 @@ int _unsteven(char **argumento)
 			free(env);
 			env = tmp;
 			free_argument(argumento);
-			return (0);
+			return (1);
 		}
 	}
 	free_argument(argumento);
-	return (0);
+	return (1);
 }

@@ -36,15 +36,13 @@ int built_ins(char **argumento, int *status, char *name, int count)
 		return (1);
 	}
 	if (!_strcmp(argumento[0], "unsetenv"))
-	{
-		_unsteven(argumento);
-		return (1);
-	}
+		return (_unsteven(argumento));
 	if (!_strcmp(argumento[0], "exit"))
 	{
 		if (exit_built_in(argumento, *status) == 2)
 		{
 			print_error(name, argumento, count, ": Illegal number: ", argumento[1]);
+			free_argument(argumento);
 			*status = 2;
 		}
 		return (1);
@@ -161,10 +159,7 @@ int exit_built_in(char **argumento, int status)
 		if ((argumento[1][i] >= '0' && argumento[1][i] <= '9'))
 			n = (n * 10) + (argumento[1][i] - '0');
 		else
-		{
-			free2(argumento, env);
 			return (2);
-		}
 		i++;
 	}
 	free2(argumento, env);
