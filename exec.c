@@ -21,7 +21,7 @@ int exec(char **argumento, char *name, int count)
 		argumento[0][0] == '.'))
 			execve(argumento[0], argumento, env);
 		path = find_path();
-		for (i = 0; path[i]; i++)
+		for (i = 0; path && path[i]; i++)
 		{
 			if (path[i][_strlen(path[i])] == '/')
 				s = string_con(path[i], argumento[0]);
@@ -39,7 +39,6 @@ int exec(char **argumento, char *name, int count)
 			if (path[i + 1])
 				simple_free(&s);
 		}
-		if (stat(s, &stats))
 			print_error(name, argumento, count, ": not found", "");
 		simple_free(&s);
 		free2(argumento, path);
@@ -60,6 +59,8 @@ char **find_path(void)
 	char **path = NULL, *s = NULL;
 
 	s = _getenv("PATH");
+	if (s == NULL)
+		return (NULL);
 	path = split_string(s, ':');
 	return (path);
 }

@@ -66,6 +66,8 @@ char *_getenv(char *arg)
 			break;
 		j++;
 	}
+	if (env[j] == NULL)
+		return (NULL);
 	return (&env[j][i + 1]);
 }
 /**
